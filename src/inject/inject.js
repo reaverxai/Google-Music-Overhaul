@@ -21,11 +21,21 @@ $(window).on('hashchange', function(e){
             $('sj-paper-button[data-id=share-artist]').attr( "icon", "av:play-shopping-bag");
             $('sj-paper-button[data-id=share-artist]').attr( "aria-label", "Shop for this Artist");
             $('sj-paper-button[data-id=share-artist]').attr( "title", "Shop for this Artist");
-            $('sj-paper-button[data-id=share-artist]').attr( "data-type", "link");
-            $('sj-paper-button[data-id=share-artist]').attr( "data-id", "share-artist");
             $('sj-paper-button[data-id=radio]').changeTag('sj-fab'); 
             $('sj-paper-button[data-id=share-artist]').changeTag('sj-fab');   
+
+       		 if (!$("#artist-link").length) {
+            $('sj-fab[data-id=share-artist]').wrap('<div id="artist-link"></div>');
+            
+            var pathArray = window.location.href.split( '/' );
+
+             $('#artist-link').append('<a href=https://play.google.com/music/preview/' + pathArray[6] + '></a>');
+
+        }
+              
     }
+
+
 
     var intervalID2 = setInterval(function() {
         if ($(".actions").length) {
@@ -40,7 +50,14 @@ $(window).on('hashchange', function(e){
         $('#auto-playlist-promo').append('<core-icon relative="" id="icon" src="{{src}}" icon="{{icon}}" aria-label="menu" role="img"><svg viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" fit="" style="pointer-events: none; display: block;"><g><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"></path></g></svg></core-icon>');
         
         $('#auto-playlists div').remove();
-        
+
+		$('.nav-section-header:nth-child(4)').attr( "id", "playlists-header");
+        $('.nav-section-divider:nth-child(3)').attr( "id", "playlists-divider");
+        setTimeout(function(){
+		$('.nav-section-header:nth-child(3)').attr( "id", "auto-playlists-header");
+        $('.nav-section-divider:nth-child(2)').attr( "id", "auto-playlists-divider");
+         }, 10);
+
         time=setInterval(function(){
 
         }, 500);
@@ -52,6 +69,23 @@ $(window).on('hashchange', function(e){
             whenElementLoaded3();
         }
     }, 100);
+
+
+    function whenElementLoaded4() {
+		$( "#auto-playlists" ).insertAfter( $( "#playlists" ) );
+		$( "#auto-playlists-header" ).insertAfter( $( "#playlists" ) );
+		$( "#auto-playlists-divider" ).insertAfter( $( "#playlists" ) );
+		$( "#playlists-header" ).insertBefore( $( "#playlists" ) );
+		$( "#playlists-divider" ).insertBefore( $( "#playlists" ) );
+    }
+
+    var intervalID4 = setInterval(function() {
+        if ($("#auto-playlists-divider").length) {
+            clearInterval(intervalID4);
+            whenElementLoaded4();
+        }
+    }, 100);
+
 
     function whenElementLoaded() {
             $('.column .material-card').unwrap();
@@ -86,7 +120,7 @@ jQuery.fn.changeTag = function (newTag) {
     return this;
 };
 
-document.getElementsByClassName("menu-logo")[0] .style.backgroundImage="url('http://i.imgur.com/FpXIgNx.png')";
+//document.getElementsByClassName("menu-logo")[0] .style.backgroundImage="url('http://i.imgur.com/FpXIgNx.png')";
 
 $('#drawer-panel').removeAttr( "narrow" );
                                                                         
