@@ -8,6 +8,7 @@ this.manifest = {
             "group": "Color",
             "name": "colorButton",
             "type": "popupButton",
+            "id": "colorButton",
             "label": "Main Navigation:",
             "options": {
                 "values": [
@@ -19,3 +20,13 @@ this.manifest = {
         }
     ]
 };
+
+function save_options() {
+  var color = document.getElementById('colorButton').value;
+  chrome.storage.sync.set({
+    favoriteColor: color,
+    nextColor: color
+  });
+}
+
+console.log(color)
