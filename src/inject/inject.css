@@ -25,8 +25,11 @@ paper-slider::shadow #sliderKnobInner, .button.primary, .simple-dialog-buttons b
 
 /* Listen Now */
 
+.gpm-card-grid-0.mini sj-card {
+    width: 109px;
+}
 
-[data-is-radio="true"] .reason {
+[data-is-radio="true"] .reason, body.qp #material-app-bar #material-one-left .music-logo {
     display: none !important;
 }
 
